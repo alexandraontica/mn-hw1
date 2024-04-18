@@ -1,0 +1,18 @@
+Metoda 1: Detecția anomaliilor
+
+Am determinat vectorul medie, matricea de varianță și probabilitatea de apariție a unui element pe baza formulelor din PDF-ul cu cerința. 
+În cadrul funcției „optimal_threshold”, am determinat valorile posibile pe care le poate lua epsilon între minimul și maximul probabilităților și am parcurs aceste valori, calculând pentru fiecare predicțiile. Pentru determinarea valorilor true_positives, false_positives si false_negatives am comparat, pe rând, câte o valoare din vectorul de predicții (predictions) cu valoarea corespunzătoare din vectorul de adevăruri (truths). Am calculat valorile pentru precision, recall și F1 pe baza explicațiilor și formulei din PDF. Pentru F1 maxim am actualizat valorile pentru best_F1, best_epsilon, associated_precision, associated_recall.
+
+Metoda 2: Kernel Regression
+
+Am calculat kernelul liniar, polinomial, respectiv gausian folosindu-mă de formulele din PDF și de precizările colegilor de pe forum. Am împărțit setul de date pentru antrenare și testare urmând indicațiile din PDF din descrierea funcției „split_dataset”. 
+Pentru funcția Cholesky am implementat formulele prezentate la laborator. Am încercat totuși să scriu o implementare diferită decât cea de la laborator, construind matricea pe coloane, nu pe linii, și folosind funcția sum() pentru sume. 
+Pentru inversarea unei matrice inferior triunghiulare am dedus o formulă pornind de la algritmul pe care îl foloseam la ALGAED (am aplicat eliminare gaussiană pe matricea [L|In] până am ajuns la ceva de forma [In|P]).
+Pentru estimarea parametrilor folosiți (atât pentru metoda iterativă, cât și pentru cea „clasică”) și pentru evaluare am urmat explicațiile din PDF.
+
+Metoda 3: Generare de text
+
+Pentru crearea array-ului cu cele k-secvențe, am calculat mai întâi numărului acestora, apoi pentru fiecare secvență am salvat cuvintele într-un cell array auxiliar. Secvența propriu-zisă am determinat-o prin concatenarea cuvintelor din array-ul auxiliar.
+Numărul de cuvinte, respectiv de secvențe distincte l-am determinat aplicând funcția unique, care returnează valorile distincte ce apar în array sortate.
+Am atribuit câte un index fiecărui cuvânt/fiecărei secvențe folosindu-mă de dicționare (am folosit funcția container.Map sugerată în hint-uri).
+Pentru crearea matricei stochastice, am parcurs k-secvențele și pentru fiecare am determinat poziția în setul de secvențe distincte, cuvântul următor și poziția cuvântului următor în setul de cuvinte distincte. Pe baza acestor poziții/indici determinați am localizat elementul ce trebuie incrementat în matrice și am făcut această incrementare.
