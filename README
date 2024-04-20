@@ -12,7 +12,7 @@ Pentru estimarea parametrilor folosiți (atât pentru metoda iterativă, cât ș
 
 Metoda 3: Generare de text
 
-Pentru crearea array-ului cu cele k-secvențe, am calculat mai întâi numărului acestora, apoi pentru fiecare secvență am salvat cuvintele într-un cell array auxiliar. Secvența propriu-zisă am determinat-o prin concatenarea cuvintelor din array-ul auxiliar.
+Pentru crearea array-ului cu cele k-secvențe, am calculat mai întâi numărul acestora, apoi pentru fiecare secvență am salvat cuvintele într-un cell array auxiliar. Secvența propriu-zisă am determinat-o prin concatenarea cuvintelor din array-ul auxiliar.
 Numărul de cuvinte, respectiv de secvențe distincte l-am determinat aplicând funcția unique, care returnează valorile distincte ce apar în array sortate.
 Am atribuit câte un index fiecărui cuvânt/fiecărei secvențe folosindu-mă de dicționare (am folosit funcția container.Map sugerată în hint-uri).
-Pentru crearea matricei stochastice, am parcurs k-secvențele și pentru fiecare am determinat poziția în setul de secvențe distincte, cuvântul următor și poziția cuvântului următor în setul de cuvinte distincte. Pe baza acestor poziții/indici determinați am localizat elementul ce trebuie incrementat în matrice și am făcut această incrementare.
+Pentru crearea matricei stochastice, am determinat cuvintele care urmează după fiecare k-secvență (pentru prima secvență acesta se află pe poziția 1 + k, pentru a doua pe poziția 2 + k ș.a.m.d.), determinând apoi pozițiile acestor cuvinte în setul de cuvinte distincte. Am determinat și pozițiile k-secvențelor în setul de secvențe distinte. Folosindu-mă de aceste valori și de dimensiunile seturilor de cuvinte/secvențe distincte, am construit matricea utilizând funcția sparse, care adaugă 1 pe poziția (k-secvență, cuvânt următor pentru această k-secvență).

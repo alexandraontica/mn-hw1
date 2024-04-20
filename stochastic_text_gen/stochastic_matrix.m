@@ -4,27 +4,19 @@ function retval = stochastic_matrix(k_secv_corpus, corpus_words, words_set, k_se
     % It should just be entry-wise
     % This is how the checker tests it, to not have to deal with floating point errors
     
-  % calculare numar de cuvinte si de k-secvente din set-uri:
+  % calcul numar de cuvinte si de k-secvente din set-uri:
   nr_wrds = length(words_set);
   nr_k_secv = length(k_secv_set);
   
-  % initializare matrice stochastica:
-  retval = zeros(nr_k_secv, nr_wrds);
+  % determinare cuvant urmator dupa fiecare k-secventa:
+  next_wrd = corpus_words((k + 1) : end);
   
-  for i = 1 : length(k_secv_corpus)
-    % salvare secventa curenta:
-    k_secv_curr = k_secv_corpus{i};
-    
-    % determinare pozitie secventa curenta in set:
-    k_secv_idx = find(strcmp(k_secv_set, k_secv_curr));
-    
-    % salvare cuvant ce urmeaza dupa secventa curenta:
-    next_word = corpus_words{i + k};
-    
-    % determinare pozitie cuvant in set ce urmeaza dupa secvena curenta:
-    next_word_idx = find(strcmp(words_set, next_word));
-    
-    % incrementare valoare in matricea stochastica:
-    retval(k_secv_idx, next_word_idx) = retval(k_secv_idx, next_word_idx) + 1;
-  endfor
+  % determinare pozitii cuvinte urmatoare in setul de cuvinte distincte: 
+  [~, next_wrd_idx] = ismember(next_wrd, words_set);
+  
+  % determinare pozitii k-secvente din corpus in setul de secvente distincte:
+  [~, k_secv_idx] = ismember(k_secv_corpus, k_secv_set);
+  
+  % constructie matrice stochastica:
+  retval = sparse(k_secv_idx, next_wrd_idx, 1, nr_k_secv, nr_wrds);
 endfunction
